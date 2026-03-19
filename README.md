@@ -8,7 +8,7 @@
 | Conteúdo | Situação | Observações extras | Aula correspondente |
 | -------- | -------- | ------------------ | ------------------ |
 | Análise de Algoritmos | ❌ |  | |
-| Pilhas | ❌ | **Falta mostrar os códigos** | **Aula 01, Aula 02** |
+| Pilhas | ✅ |  | **Aula 01, Aula 02** |
 | Filas | ❌ | | |
 | Deques | ❌ | | |
 | Listas encadeadas | ❌ | | |
