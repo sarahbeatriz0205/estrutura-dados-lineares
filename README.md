@@ -5,10 +5,10 @@
 
 > ❌ = Não exposto em sala
 
-| Conteúdo | Situação | Observações extras | Aula correspondente |
+| Conteúdo | Situação | Observações extras | Pasta correspondente |
 | -------- | -------- | ------------------ | ------------------ |
 | Análise de Algoritmos | ❌ |  | |
-| Pilhas | ✅ |  | **Aula 01, Aula 02** |
+| Pilhas | ✅ |  | **aulas_pilha** |
 | Filas | ❌ | | |
 | Deques | ❌ | | |
 | Listas encadeadas | ❌ | | |
