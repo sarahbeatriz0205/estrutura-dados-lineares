@@ -1,1 +1,1 @@
-## Exercícios de Estrutura de Dados
+## Atividades de Estrutura de Dados
