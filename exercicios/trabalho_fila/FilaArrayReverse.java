@@ -1,10 +1,11 @@
-package exercicios.fila_simplesmente_encadeada;
+package exercicios.trabalho_fila;
 
-public class FilaArrayReverse{
+public class FilaArrayReverse implements IFila{
     private int i;
     private int f;
     private int tamanho;
-    private int incremento; // crescimento
+    private int incremento; 
+    private boolean reverse;
     private Object o[];
 
     public FilaArrayReverse(int tamanho, int incremento){
@@ -13,44 +14,82 @@ public class FilaArrayReverse{
         this.incremento = incremento;
     }
 
-    public void enqueue(Object elemento){
-        if (size() == N-1){ // se já estiver cheio
-            int novoTamanho; // nova capacidade pro array
-            if (incremento == 0){ novoTamanho = N*2; } // duplicação
-            else{ novoTamanho = N+incremento; }
-            Object[] b = new Object[novoTamanho]; // array novo com a incrementação
-            int inicio_dois = i;
-            for (int final_dois = 0; final_dois < size(); final_dois++){ // cópia pro novo array
-                b[final_dois] = o[inicio_dois];
-                inicio_dois = (inicio_dois+1)%N; // recalcula a rota pra o início voltar a ser o índice 0 no novo array
-            }
-            f  = size(); // novo final
-            i = 0; // novo início
-            N = novoTamanho; // atualizando o tamanho
-            o = b; // lista original agora aponta pra a cópia; aqui a lista original ANTIGA é levada pelo garbage collector
-        }
-        o[f] = elemento; // insere o novo elemento
-        f = (f+1)%N; // recalcula só o final depois de inserir o elemento
+    public void isReversed(){
+        reverse = !reverse;
     }
 
-    public Object dequeue(){
+    public void enqueue(Object elemento){
+        if (size() == this.tamanho - 1){
+            int novoTamanho = this.tamanho*2;
+            Object[] b = new Object[novoTamanho]; 
+            int inicio_dois = i;
+            for (int final_dois = 0; final_dois < size(); final_dois++){ 
+                b[final_dois] = o[inicio_dois];
+                inicio_dois = (inicio_dois+1)%this.tamanho;
+            }
+            f  = size(); 
+            i = 0; 
+            this.tamanho = novoTamanho; 
+            o = b;
+        }
+        if (reverse){
+            i = (i-1+this.tamanho)%this.tamanho;
+            o[i] = elemento;
+        }
+        else{
+            o[f] = elemento; 
+            f = (f+1)%this.tamanho;
+        }
+    }
+
+        
+    public Object dequeue() throws FilaVaziaExcecao{
+        Object temp = null;
         if(isEmpty()){ throw new FilaVaziaExcecao("A Fila está vazia");}
-        Object temp = o[i]; // cria uma cópia do elemento do início
-        i = (i+1)%N; // avança o início pra remover o elemento que antes era o início
-        return temp; // retorna o elemento removido
+        else{
+            if (reverse){
+                f = (f-1+this.tamanho)%this.tamanho;
+                temp = o[f]; 
+            }
+            else{
+                temp = o[i]; 
+                i = (i+1)%this.tamanho; 
+            }
+        }
+        if (size() <= this.tamanho / 3) {
+            int novoTamanho = this.tamanho / 2;
+            Object[] b = new Object[novoTamanho];
+            int inicio_dois = i;
+            for (int final_dois = 0; final_dois < size(); final_dois++) {
+                b[final_dois] = o[inicio_dois];
+                inicio_dois = (inicio_dois + 1) % this.tamanho;
+            }
+            f = size();
+            i = 0;
+            this.tamanho = novoTamanho;
+            o = b;
+        }
+        return temp;
     }
 
     public int size(){
-        return (N-i+f)%N;
+        return (this.tamanho-i+f)%this.tamanho;
     }
 
     public boolean isEmpty(){
         return f==i;
     }
 
-    public Object first(){
-        return o[i];
+    public Object first() throws FilaVaziaExcecao{
+        if(isEmpty()){ throw new FilaVaziaExcecao("A Fila está vazia");}
+        else{
+            if (reverse){
+                f = (f-1+this.tamanho)%this.tamanho;
+                return o[f];
+            }
+            else{
+                return o[i];
+            }
+        }
     }
-
-
 }
