@@ -7,7 +7,7 @@ public class FilaArrayReverse implements IFila{
     private int incremento; 
     private boolean reverse;
     private Object o[];
-
+i
     public FilaArrayReverse(int tamanho, int incremento){
         o = new Object[tamanho];
         this.tamanho = tamanho;
